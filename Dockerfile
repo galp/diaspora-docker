@@ -10,20 +10,21 @@ RUN echo "deb http://http.debian.net/debian jessie-backports main" >> /etc/apt/s
 
 RUN adduser --disabled-login --home /home/diaspora diaspora
 
-RUN cd /home/diaspora ; git clone -b master https://github.com/diaspora/diaspora.git
+RUN cd /home/diaspora ; su -c "git clone -b master https://github.com/diaspora/diaspora.git" diaspora
 WORKDIR /home/diaspora/diaspora
-RUN RAILS_ENV=production bundle install --jobs $(nproc) --deployment --without test development --with postgresql
 
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 COPY docker/nginx.conf  /etc/nginx/nginx.conf
-COPY docker/diaspora.yml diaspora.yml
-COPY docker/database.yml ./database.yml
+COPY docker/diaspora.yml ./config/diaspora.yml
+COPY docker/database.yml ./config/database.yml
 
+RUN su -c "RAILS_ENV=production bundle install --jobs $(nproc) --deployment --without test development --with postgresql" diaspora
+RUN su -c "RAILS_ENV=production bin/rake assets:precompile" diaspora
 #RUN RAILS_ENV=production bin/rake db:create db:schema:load
-#RUN RAILS_ENV=production bin/rake assets:precompile
+
 #RUN openssl dhparam 2048 > /etc/ssl/dhparam.pem
 VOLUME /etc/certs
-EXPOSE 80 443
+EXPOSE 80 443 5269
 CMD ["/usr/bin/supervisord"]
 
 

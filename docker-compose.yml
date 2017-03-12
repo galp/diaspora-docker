@@ -1,25 +1,32 @@
 version: '2'
 
-networks:
-    default:
-        external:
-            name: dev
-
 services:
-    diaspora:
-        build:
-            context: .
-        container_name: diaspora
-        environment:
-            SSH_AUTH_SOCK:  "/ssh-agent"
-        links:
-            - postgres
-        volumes:
-            - ./ssl:/etc/certs
-            - $SSH_AUTH_SOCK:/ssh-agent # Forward local machine SSH key to docker
-        ports:
-          - "80:8080"
-          - "443:8443"
-    postgres:
-      image: postgres:9
-
+  diaspora:
+    build:
+      context: .
+    container_name: diaspora
+    environment:
+        ENVIRONMENT_URL: https://diaspora
+        ENVIRONMENT_REDIS: redis://redis
+        SSH_AUTH_SOCK:  "/ssh-agent"
+    links:
+      - postgres
+      - redis
+    volumes:
+      - ./ssl:/etc/certs
+      - $SSH_AUTH_SOCK:/ssh-agent # Forward local machine SSH key to docker
+    ports:
+      - "80:80"
+      - "443:443"
+    networks:
+      - default
+  postgres:
+    image: postgres:9
+    container_name: postgres
+    environment:
+      POSTGRES_PASSWORD: "mysecretpassword"
+    networks:
+      - default
+  redis:
+    image: redis:3
+    container_name: redis

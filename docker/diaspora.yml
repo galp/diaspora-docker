@@ -22,7 +22,6 @@
 ##
 ## - For example, on Heroku:
 ##   heroku config:set SERVICES_FACEBOOK_APP_ID=yourappid SERVICES_FACEBOOK_SECRET=yourappsecret
-
 configuration: ## Section
 
   ## You need to change or at least review the settings in this section
@@ -42,7 +41,7 @@ configuration: ## Section
     ## This is specific to your operating system.
     ## Examples (uncomment the relevant one or add your own):
     ## For Debian, Ubuntu, Archlinux, Gentoo (package ca-certificates):
-    #certificate_authorities: '/etc/ssl/certs/ca-certificates.crt'
+    certificate_authorities: '/etc/ssl/certs/ca-certificates.crt'
     ## For CentOS, Fedora:
     #certificate_authorities: '/etc/pki/tls/certs/ca-bundle.crt'
 

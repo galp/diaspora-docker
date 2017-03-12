@@ -1,0 +1,25 @@
+version: '2'
+
+networks:
+    default:
+        external:
+            name: dev
+
+services:
+    diaspora:
+        build:
+            context: .
+        container_name: diaspora
+        environment:
+            SSH_AUTH_SOCK:  "/ssh-agent"
+        links:
+            - postgres
+        volumes:
+            - ./ssl:/etc/certs
+            - $SSH_AUTH_SOCK:/ssh-agent # Forward local machine SSH key to docker
+        ports:
+          - "80:8080"
+          - "443:8443"
+    postgres:
+      image: postgres:9
+

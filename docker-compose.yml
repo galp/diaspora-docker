@@ -13,7 +13,7 @@ services:
       - postgres
       - redis
     volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
+      - /etc/letsencrypt/live/${DIASPORA_HOST}:/etc/ssl
       - /data/diaspora/uploads:/home/diaspora/diaspora/public/uploads
     ports:
       - "80:80"
@@ -27,7 +27,7 @@ services:
       POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
-      - //var/lib/postgresql/data:/var/lib/postgresql/data
+      - /var/lib/postgresql/data:/var/lib/postgresql/data
     networks:
       - default
   redis:

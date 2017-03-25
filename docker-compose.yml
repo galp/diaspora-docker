@@ -13,8 +13,7 @@ services:
       - postgres
       - redis
     volumes:
-      - ./ssl:/etc/certs
-      - $SSH_AUTH_SOCK:/ssh-agent # Forward local machine SSH key to docker
+      - ./ssl:/etc/letsencrypt
     ports:
       - "80:80"
       - "443:443"

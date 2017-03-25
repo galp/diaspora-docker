@@ -87,7 +87,7 @@ configuration: ## Section
       ## Lines of backtrace that are stored on failure (default=15).
       ## Set n to the required value. Set this to false to reduce Redis memory
       ## usage (and log size) if you're not interested in this data.
-      #backtrace: 15
+      backtrace: false
 
       ## Number of jobs to keep in the dead queue (default=5000).
       ## Jobs get into the dead queue after they failed and exhausted all retries.

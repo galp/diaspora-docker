@@ -6,14 +6,15 @@ services:
       context: .
     container_name: diaspora
     environment:
-        ENVIRONMENT_URL: https://diaspora
+        ENVIRONMENT_URL: "https://${DIASPORA_HOST}"
         ENVIRONMENT_REDIS: redis://redis
         SSH_AUTH_SOCK:  "/ssh-agent"
     links:
       - postgres
       - redis
     volumes:
-      - ./ssl:/etc/letsencrypt
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /data/diaspora/uploads:/home/diaspora/diaspora/public/uploads
     ports:
       - "80:80"
       - "443:443"
@@ -23,7 +24,7 @@ services:
     image: postgres:9
     container_name: postgres
     environment:
-      POSTGRES_PASSWORD: "mysecretpassword"
+      POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
       PGDATA: /var/lib/postgresql/data/pgdata
     volumes:
       - //var/lib/postgresql/data:/var/lib/postgresql/data

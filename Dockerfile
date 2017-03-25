@@ -22,8 +22,8 @@ RUN su -c "RAILS_ENV=production bundle install --jobs $(nproc) --deployment --wi
 RUN su -c "RAILS_ENV=production bin/rake assets:precompile" diaspora
 #RUN RAILS_ENV=production bin/rake db:create db:schema:load
 
-RUN openssl dhparam 2048 > /etc/ssl/dhparam.pem
-VOLUME /etc/ssl /home/diaspora/diaspora/public/uploads
+RUN openssl dhparam 2048 > /etc/certs/dhparam.pem
+VOLUME /etc/certs /home/diaspora/diaspora/public/uploads
 EXPOSE 80 443 5269
 CMD ["/usr/bin/supervisord"]
 

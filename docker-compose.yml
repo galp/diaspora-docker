@@ -13,7 +13,7 @@ services:
       - postgres
       - redis
     volumes:
-      - /etc/letsencrypt/live/${DIASPORA_HOST}:/etc/ssl
+      - /etc/letsencrypt:/etc/letsencrypt
       - /data/diaspora/uploads:/home/diaspora/diaspora/public/uploads
     ports:
       - "80:80"

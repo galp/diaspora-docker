@@ -8,6 +8,7 @@ services:
     environment:
         ENVIRONMENT_URL: "https://${DIASPORA_HOST}"
         ENVIRONMENT_REDIS: redis://redis
+        ENVIRONMENT_ENABLE_REGISTRATIONS: false
         SSH_AUTH_SOCK:  "/ssh-agent"
     links:
       - postgres

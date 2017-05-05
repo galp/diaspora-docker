@@ -8,8 +8,8 @@ services:
     environment:
         ENVIRONMENT_URL: "https://${DIASPORA_HOST}"
         ENVIRONMENT_REDIS: redis://redis
-        ENVIRONMENT_ENABLE_REGISTRATIONS: false
-        MAIL_ENABLE: true
+        ENVIRONMENT_ENABLE_REGISTRATIONS: "false"
+        MAIL_ENABLE: "true"
         MAIL_SENDER_ADDRESS: no-reply@pod.cudigital.media
         MAIL_METHOD: sendmail
         SSH_AUTH_SOCK:  "/ssh-agent"

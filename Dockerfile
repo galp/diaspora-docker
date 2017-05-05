@@ -6,7 +6,7 @@ RUN echo "deb http://http.debian.net/debian jessie-backports main" >> /etc/apt/s
      build-essential cmake libssl-dev libcurl4-openssl-dev \
      libxml2-dev libxslt-dev imagemagick ghostscript curl \
      libmagickwand-dev git libpq-dev redis-server nodejs \
-     supervisor nginx-light ca-certificates
+     sendmail supervisor nginx-light ca-certificates
 
 RUN adduser --disabled-login --home /home/diaspora diaspora
 

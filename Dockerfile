@@ -14,7 +14,7 @@ RUN cd /home/diaspora ; su -c "git clone -b master https://github.com/diaspora/d
 WORKDIR /home/diaspora/diaspora
 
 COPY docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY docker/nginx.conf  /etc/nginx/nginx.conf
+#COPY docker/nginx.conf  /etc/nginx/nginx.conf
 COPY docker/diaspora.yml ./config/diaspora.yml
 COPY docker/database.yml ./config/database.yml
 
@@ -24,7 +24,7 @@ RUN su -c "RAILS_ENV=production bin/rake assets:precompile" diaspora
 
 #RUN mkdir /etc/certs && openssl dhparam 2048 > /etc/certs/dhparam.pem
 VOLUME /etc/letsencrypt /home/diaspora/diaspora/public/uploads
-EXPOSE 80 443 5269
+EXPOSE 3000
 CMD ["/usr/bin/supervisord"]
 
 

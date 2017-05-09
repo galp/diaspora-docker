@@ -174,7 +174,7 @@ configuration: ## Section
     ## Where the appserver should listen to (default=unix:tmp/diaspora.sock)
     #listen: 'unix:tmp/diaspora.sock'
     #listen: 'unix:/run/diaspora/diaspora.sock'
-    #listen: '127.0.0.1:3000'
+    listen: '127.0.0.1:3000'
 
     ## Set the path for the PID file of the unicorn master process (default=tmp/pids/web.pid)
     #pid: 'tmp/pids/web.pid'

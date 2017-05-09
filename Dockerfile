@@ -8,7 +8,7 @@ RUN echo "deb http://http.debian.net/debian jessie-backports main" >> /etc/apt/s
      libmagickwand-dev git libpq-dev redis-server nodejs \
      supervisor nginx-light ca-certificates
 
-RUN echo "exim4 exim4/dc_eximconfig_configtype string internet site; mail is sent and received directly using SMTP" | debconf-set-selections ; DEBIAN_FRONTEND=noninteractive dpkg-reconfigure exim4-config
+RUN echo "exim4-config exim4/dc_eximconfig_configtype string internet site; mail is sent and received directly using SMTP" | debconf-set-selections ; DEBIAN_FRONTEND=noninteractive dpkg-reconfigure exim4-config
 RUN adduser --disabled-login --home /home/diaspora diaspora
 
 RUN cd /home/diaspora ; su -c "git clone -b master https://github.com/diaspora/diaspora.git" diaspora

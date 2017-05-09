@@ -5,6 +5,7 @@ services:
     build:
       context: .
     container_name: diaspora
+    hostname: "${DIASPORA_HOST}"
     environment:
         ENVIRONMENT_URL: "https://${DIASPORA_HOST}"
         ENVIRONMENT_REDIS: redis://redis
@@ -13,6 +14,7 @@ services:
         MAIL_ENABLE: "true"
         MAIL_SENDER_ADDRESS: no-reply@pod.cudigital.media
         MAIL_METHOD: sendmail
+        MAIL_EXIM_FIX: "true"
         SSH_AUTH_SOCK:  "/ssh-agent"
     links:
       - postgres

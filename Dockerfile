@@ -3,10 +3,10 @@ FROM ruby:2.3
 RUN echo "deb http://http.debian.net/debian jessie-backports main" >> /etc/apt/sources.list \
      && echo 'APT::Install-Recommends "0";' > /etc/apt/apt.conf.d/99norecommends \
      && apt-get update && apt-get install -y \
-     build-essential cmake libssl-dev libcurl4-openssl-dev \
+     build-essential cmake exim4-daemon-light libssl-dev libcurl4-openssl-dev \
      libxml2-dev libxslt-dev imagemagick ghostscript curl \
      libmagickwand-dev git libpq-dev redis-server nodejs \
-     sendmail supervisor nginx-light ca-certificates
+     supervisor nginx-light ca-certificates
 
 RUN adduser --disabled-login --home /home/diaspora diaspora
 

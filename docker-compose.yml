@@ -13,12 +13,17 @@ services:
         SETTINGS_AUTOFOLLOW_ON_JOIN_USER: DMCritCircle@pod.cudigital.media
         MAIL_ENABLE: "true"
         MAIL_SENDER_ADDRESS: no-reply@pod.cudigital.media
-        MAIL_METHOD: sendmail
-        MAIL_EXIM_FIX: "true"
+        MAIL_METHOD: smtp
+        MAIL_SMTP_HOST: smtp
+        MAIL_SMTP_PORT: 25
+        MAIL_SMTP_AUTHENTICATION: none
+        MAIL_SMTP_STARTTLS_AUTO: "false"
+        MAIL_SMTP_DOMAIN: "${DIASPORA_HOST}"
         SSH_AUTH_SOCK:  "/ssh-agent"
     links:
       - postgres
       - redis
+      - smtp
     volumes:
       - /etc/letsencrypt:/etc/letsencrypt
       - /data/diaspora/uploads:/home/diaspora/diaspora/public/uploads
@@ -40,3 +45,9 @@ services:
   redis:
     image: redis:3
     container_name: redis
+  smtp:
+    image: tianon/exim4:latest
+    container_name: exim4
+    hostname: "${DIASPORA_HOST}"
+    volumes:
+      - /etc/mailname:/etc/mailname:ro
